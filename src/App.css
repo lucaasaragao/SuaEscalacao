@@ -121,36 +121,42 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   align-items: flex-start;
   margin-top: 10px;
+  width: 100%;
 }
 
 /* CAMPO TÁTICO */
 .field {
   width: 580px;
   height: 700px;
-  background: linear-gradient(180deg, #0e1628 0%, #09101c 100%);
-  border: 1px solid var(--panel-border);
-  box-shadow: var(--shadow-lg), inset 0 2px 20px rgba(255, 255, 255, 0.02);
-  border-radius: 20px;
+  background: repeating-linear-gradient(
+    0deg,
+    #216e25,
+    #216e25 45px,
+    #29802e 45px,
+    #29802e 90px
+  );
+  border: 4px solid #fff;
+  box-shadow: var(--shadow-lg), inset 0 2px 40px rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
   position: relative;
   padding: 16px;
   overflow: hidden;
 }
 
-/* Marcações do campo de futebol (Design Minimalista Neon) */
+/* Marcações do campo de futebol */
 .field::before {
   content: '';
   position: absolute;
   top: 16px; bottom: 16px; left: 16px; right: 16px;
-  border: 2px solid rgba(255,255,255,0.04);
-  border-radius: 12px;
+  border: 4px solid rgba(255,255,255,0.7);
   pointer-events: none;
 }
 .field::after {
   content: '';
   position: absolute;
   top: 50%; left: 16px; right: 16px;
-  height: 2px;
-  background: rgba(255,255,255,0.04);
+  height: 4px;
+  background: rgba(255,255,255,0.7);
   transform: translateY(-50%);
   pointer-events: none;
 }
@@ -158,18 +164,27 @@ h1, h2, h3, h4, h5, h6 {
 .pitch-circle {
   position: absolute;
   top: 50%; left: 50%;
-  width: 120px; height: 120px;
-  border: 2px solid rgba(255,255,255,0.04);
+  width: 140px; height: 140px;
+  border: 4px solid rgba(255,255,255,0.7);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
+}
+.pitch-circle::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 12px; height: 12px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
 /* Grande Áreas */
 .pitch-area-top, .pitch-area-bottom {
   position: absolute;
   left: 50%;
-  width: 240px; height: 100px;
-  border: 2px solid rgba(255,255,255,0.04);
+  width: 250px; height: 110px;
+  border: 4px solid rgba(255,255,255,0.7);
   transform: translateX(-50%);
   pointer-events: none;
 }
@@ -352,17 +367,27 @@ h1, h2, h3, h4, h5, h6 {
 .slot-name-bg {
   position: absolute;
   bottom: -22px;
-  background: rgba(0, 0, 0, 0.85);
-  padding: 3px 8px;
+  background: rgba(0, 0, 0, 0.95);
+  padding: 4px 10px;
   border-radius: 6px;
-  font-size: 11px;
+  font-size: 13px;
+  color: #fff;
   white-space: nowrap;
   pointer-events: none;
   font-family: var(--font-body);
-  font-weight: 500;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
   z-index: 5;
+}
+.player-slot.assigned .slot-name-bg {
+  background: var(--primary-color);
+  color: #111;
+  border-color: #00e676;
+  text-shadow: none;
+  box-shadow: 0 4px 12px rgba(0, 210, 106, 0.6);
 }
 .list-player-photo {
   width: 46px;
@@ -373,9 +398,7 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--bg-color);
 }
 
-/* ----------- POSIÇÕES TÁTICAS (Transições suaves adicionadas ao .player-slot) ----------- */
-/* Usamos left (eixo X) e bottom (eixo Y) */
-
+/* ----------- POSIÇÕES TÁTICAS ----------- */
 /* 4-3-3 (padrão) */
 .field.formation-433 .gk  { bottom: 6%; left: 50%; }
 .field.formation-433 .lb  { bottom: 22%; left: 16%; }
@@ -419,7 +442,33 @@ h1, h2, h3, h4, h5, h6 {
 .field.formation-442 .rw  { bottom: 50%; left: 82%; }
 
 .field.formation-442 .st  { bottom: 80%; left: 40%; }
-.field.formation-442 .cam { bottom: 80%; left: 60%; } /* Representa o segundo atacante */
+.field.formation-442 .cam { bottom: 80%; left: 60%; }
+
+/* 5-3-2 */
+.field.formation-532 .gk  { bottom: 6%; left: 50%; }
+.field.formation-532 .lb  { bottom: 25%; left: 15%; }
+.field.formation-532 .cb1 { bottom: 20%; left: 34%; }
+.field.formation-532 .cb2 { bottom: 18%; left: 50%; }
+.field.formation-532 .cb3 { bottom: 20%; left: 66%; }
+.field.formation-532 .rb  { bottom: 25%; left: 85%; }
+.field.formation-532 .cm1 { bottom: 42%; left: 28%; }
+.field.formation-532 .cam { bottom: 48%; left: 50%; }
+.field.formation-532 .cm2 { bottom: 42%; left: 72%; }
+.field.formation-532 .st  { bottom: 82%; left: 40%; }
+.field.formation-532 .rw  { bottom: 82%; left: 60%; } /* acting as ST2 */
+
+/* 3-4-3 */
+.field.formation-343 .gk  { bottom: 6%; left: 50%; }
+.field.formation-343 .cb1 { bottom: 22%; left: 28%; }
+.field.formation-343 .cb2 { bottom: 20%; left: 50%; }
+.field.formation-343 .cb3 { bottom: 22%; left: 72%; }
+.field.formation-343 .lw  { bottom: 50%; left: 18%; } /* acting as LM */
+.field.formation-343 .cm1 { bottom: 48%; left: 38%; }
+.field.formation-343 .cm2 { bottom: 48%; left: 62%; }
+.field.formation-343 .rb  { bottom: 50%; left: 82%; } /* acting as RM */
+.field.formation-343 .cam { bottom: 78%; left: 28%; } /* acting as LF/LW */
+.field.formation-343 .st  { bottom: 84%; left: 50%; } /* acting as CF */
+.field.formation-343 .rw  { bottom: 78%; left: 72%; } /* acting as RF/RW */
 
 
 /* ----------- PAINEL LATERAL (SIDEBAR) ----------- */
@@ -618,29 +667,50 @@ h1, h2, h3, h4, h5, h6 {
   .content {
     flex-direction: column;
     align-items: center;
-  }
-  .sidebar {
-    width: 580px;
     max-width: 100%;
   }
-  .panel {
-    height: 400px;
-  }
-  .field {
+  .sidebar {
     width: 100%;
     max-width: 580px;
+  }
+  .panel {
+    height: 450px;
   }
 }
 
 @media (max-width: 620px) {
+  .field-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* Ensures we do not have horizontal overflow */
+    overflow: hidden;
+  }
   .field {
-    height: 600px;
-    transform: scale(0.9);
+    /* Scaled linearly based on viewport width minus padding (30px side padding) */
+    transform: scale(calc((100vw - 60px) / 580));
     transform-origin: top center;
+    /* Reclaiming the empty space created from transform-scale scaling down the original 700px height */
+    margin-bottom: calc(-700px * (1 - ((100vw - 60px) / 580)));
   }
   .app-header {
     flex-direction: column;
     align-items: center;
     gap: 16px;
   }
+}
+
+/* FOOTER CREDITS */
+.app-footer {
+  text-align: center;
+  padding: 24px 0 40px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  opacity: 0.8;
+}
+.app-footer span {
+  color: var(--primary-color);
+  font-weight: 700;
 }
