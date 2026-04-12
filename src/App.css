@@ -1,45 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg-color: #0b0f19;
+  --bg-gradient: radial-gradient(circle at 15% 50%, rgba(20, 163, 80, 0.1), transparent 40%), radial-gradient(circle at 85% 30%, rgba(255, 213, 0, 0.05), transparent 40%), linear-gradient(180deg, #060a11 0%, #0b0f19 100%);
+  --panel-bg: rgba(22, 28, 45, 0.65);
+  --panel-border: rgba(255, 255, 255, 0.08);
+  
+  --primary-color: #00d26a; /* Copa Green Highlight */
+  --accent-color: #ffd800; /* World Cup Gold */
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  
+  --font-headings: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  
+  --slot-bg: rgba(255, 255, 255, 0.1);
+  --slot-border: rgba(255, 255, 255, 0.15);
+  --slot-hover: rgba(255, 255, 255, 0.2);
+  --slot-assigned: linear-gradient(135deg, #ffd800 0%, #ffaa00 100%);
+  
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(255, 216, 0, 0.3);
+}
+
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: radial-gradient(1200px 500px at 10% 10%, rgba(30,127,30,0.18), transparent),
-              linear-gradient(180deg, #071007 0%, #071307 100%);
-  color: #e6f2e6;
+  font-family: var(--font-body);
+  background: var(--bg-gradient);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings);
 }
 
 .container {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  text-align: center;
+  padding: 30px;
+  box-sizing: border-box;
 }
 
 /* HEADER */
-.container > h1 {
-  text-align: left;
-  margin: 0 0 12px 0;
-  padding: 0 20px 12px 20px;
-  width: calc(100% - 40px); /* respeita o padding da .container */
-  max-width: 720px; /* evita que a linha fique muito longa em telas grandes */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.container > .app-header {
+.app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 720px;
-  margin: 0 auto 12px auto;
-  padding: 0 20px;
-  box-sizing: border-box;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+  margin-bottom: 24px;
+  padding: 16px 28px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .app-header h1 {
-  font-size: 20px;
-  font-weight: 700;
-  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
   margin: 0;
+  background: linear-gradient(90deg, #fff, #cbd5e1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
 }
 
 .header-controls {
@@ -48,272 +76,571 @@ body {
   align-items: center;
 }
 
-.header-controls label { color: #cfe6cfe0; font-size: 13px; }
+.header-controls label {
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
 .header-controls select {
-  min-width: 110px;
-  background: rgba(255,255,255,0.04);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.12);
-  padding: 6px 8px;
-  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  min-width: 130px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  border: 1px solid var(--panel-border);
+  padding: 10px 14px;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* aumenta espaçamento entre header e conteúdo */
-.content {
-  margin-top: 12px;
+.header-controls select:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
+.header-controls select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 210, 106, 0.2);
+}
+
+.header-controls select option {
+  background: #111827;
+  color: #fff;
+}
+
+/* MAIN LAYOUT */
 .content {
   display: flex;
-  gap: 20px;
+  gap: 32px;
   justify-content: center;
+  align-items: flex-start;
+  margin-top: 10px;
 }
 
-/* CAMPO */
+/* CAMPO TÁTICO */
 .field {
-  width: 520px; /* mais largo para dar espaço ao campo */
-  height: 640px;
-  background: linear-gradient(180deg,#123b12 0%, #0e2a0e 100%);
-  border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 2px 8px rgba(255,255,255,0.02);
-  border-radius: 12px;
+  width: 580px;
+  height: 700px;
+  background: linear-gradient(180deg, #0e1628 0%, #09101c 100%);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--shadow-lg), inset 0 2px 20px rgba(255, 255, 255, 0.02);
+  border-radius: 20px;
   position: relative;
-  padding: 12px;
+  padding: 16px;
+  overflow: hidden;
 }
 
-/* delimita o pitch: todas as posições absolutas são relativas a este container */
+/* Marcações do campo de futebol (Design Minimalista Neon) */
+.field::before {
+  content: '';
+  position: absolute;
+  top: 16px; bottom: 16px; left: 16px; right: 16px;
+  border: 2px solid rgba(255,255,255,0.04);
+  border-radius: 12px;
+  pointer-events: none;
+}
+.field::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 16px; right: 16px;
+  height: 2px;
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+/* Círculo central */
+.pitch-circle {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 120px; height: 120px;
+  border: 2px solid rgba(255,255,255,0.04);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+/* Grande Áreas */
+.pitch-area-top, .pitch-area-bottom {
+  position: absolute;
+  left: 50%;
+  width: 240px; height: 100px;
+  border: 2px solid rgba(255,255,255,0.04);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.pitch-area-top {
+  top: 16px;
+  border-top: none;
+}
+.pitch-area-bottom {
+  bottom: 16px;
+  border-bottom: none;
+}
+
 .field .pitch {
   position: absolute;
-  inset: 12px; /* respeita o padding da .field */
+  inset: 16px;
   box-sizing: border-box;
-  overflow: hidden; /* evita que bolinhas escapem do campo */
-  pointer-events: auto; /* permite clicar nos slots dentro do pitch */
+  pointer-events: auto;
 }
 
-/* garante que player-slots usem o pitch como referência */
-.field .pitch .player-slot {
-  position: absolute; /* já tinham posições absolutas (bottom/left), agora relativas ao .pitch */
-  transform: none; /* remove transform herdado para posicionamento consistente */
-}
-
-/* pequenas correções para evitar que estilos globais que usem porcentagens se refiram a .field em vez do .pitch */
-.field { position: relative; }
-
-/* mantém interatividade */
-.field .pitch .player-slot { cursor: pointer; }
-
-/* 4-3-3 (padrão) — uma linha de 4 na defesa, três no meio e três no ataque */
-.field.formation-433 .gk { bottom: 4%; left: 50%; transform: translateX(-50%); }
-.field.formation-433 .lb { bottom: 20%; left: 8%; }
-.field.formation-433 .cb1 { bottom: 20%; left: 30%; }
-.field.formation-433 .cb2 { bottom: 20%; left: 56%; }
-.field.formation-433 .rb { bottom: 20%; left: 80%; }
-
-/* meio em linha de 3 */
-.field.formation-433 .cm1 { bottom: 45%; left: 8%; }
-.field.formation-433 .cam { bottom: 45%; left: 50%; transform: translateX(-50%); }
-.field.formation-433 .cm2 { bottom: 45%; left: 80%; }
-
-/* ataque em linha de 3 */
-.field.formation-433 .lw { bottom: 76%; left: 8%; }
-.field.formation-433 .st { bottom: 76%; left: 50%; transform: translateX(-50%); }
-.field.formation-433 .rw { bottom: 76%; left: 80%; }
-
-/* 4-2-3-1: dois volantes e um meia ofensivo (ajustado para ficar consistente com 4-3-3 e 4-4-2) */
-.field.formation-4231 .gk { bottom: 4%; left: 50%; transform: translateX(-50%); }
-.field.formation-4231 .lb { bottom: 20%; left: 8%; }
-.field.formation-4231 .cb1 { bottom: 20%; left: 30%; }
-.field.formation-4231 .cb2 { bottom: 20%; left: 56%; }
-.field.formation-4231 .rb { bottom: 20%; left: 80%; }
-
-/* dois volantes (mais recuados, centralizados) */
-.field.formation-4231 .cm1 { bottom: 40%; left: 36%; }
-.field.formation-4231 .cm2 { bottom: 40%; left: 64%; }
-
-/* meia ofensivo adiantado, central */
-.field.formation-4231 .cam { bottom: 60%; left: 50%; transform: translateX(-50%); }
-
-/* ataque (alas e ponta central) */
-.field.formation-4231 .lw { bottom: 76%; left: 12%; }
-.field.formation-4231 .st { bottom: 76%; left: 50%; transform: translateX(-50%); }
-.field.formation-4231 .rw { bottom: 76%; left: 88%; }
-
-/* 4-4-2: duas linhas de quatro e dois atacantes */
-.field.formation-442 .gk { bottom: 4%; left: 50%; transform: translateX(-50%); }
-.field.formation-442 .lb { bottom: 20%; left: 6%; }
-.field.formation-442 .cb1 { bottom: 20%; left: 30%; }
-.field.formation-442 .cb2 { bottom: 20%; left: 55%; }
-.field.formation-442 .rb { bottom: 20%; left: 80%; }
-
-/* linha de quatro no meio */
-.field.formation-442 .lw { bottom: 48%; left: 6%; }
-.field.formation-442 .cm1 { bottom: 48%; left: 30%; }
-.field.formation-442 .cm2 { bottom: 48%; left: 55%; }
-.field.formation-442 .rw { bottom: 48%; left: 80%; }
-
-/* dupla de ataque */
-.field.formation-442 .st { bottom: 78%; left: 40%; transform: translateX(-50%); }
-.field.formation-442 .cam { bottom: 78%; left: 60%; transform: translateX(-50%); }
-
-/* POSIÇIONAMENTO PADRÃO (fallback) - pequenas correções para consistência */
-.gk { bottom: 4%; left: 50%; transform: translateX(-50%); }
-.lb { bottom: 12%; left: 8%; }
-.cb1 { bottom: 12%; left: 30%; }
-.cb2 { bottom: 12%; left: 62%; }
-.rb { bottom: 12%; left: 84%; }
-
-.cm1 { bottom: 45%; left: 30%; }
-.cm2 { bottom: 45%; left: 66%; }
-.cam { bottom: 60%; left: 50%; transform: translateX(-50%); }
-
-.lw { bottom: 76%; left: 12%; }
-.st { bottom: 76%; left: 50%; transform: translateX(-50%); }
-.rw { bottom: 76%; left: 88%; }
-
-/* POSIÇÕES - estilo das bolinhas */
+/* SLOTS DE JOGADORES */
 .player-slot {
   position: absolute;
-  width: 72px;
-  height: 72px;
-  background: linear-gradient(180deg,#d9d9d9 0%, #cfcfcf 100%); /* tom de cinza mais suave para indicar 'clique aqui' */
-  color: #0a0a0a;
+  width: 76px;
+  height: 76px;
+  background: var(--slot-bg);
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  color: var(--text-main);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.5);
-  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s;
+  font-family: var(--font-headings);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
+  backdrop-filter: blur(8px);
+  z-index: 10;
+  margin-left: -38px; /* centraliza melhor na coordenada base do transform */
+  margin-bottom: -38px;
 }
 
-.player-slot:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.6); }
+.player-slot::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
 
-.player-slot.empty { opacity: 0.95; color: transparent; }
+.player-slot:hover {
+  transform: translateY(-5px) scale(1.05);
+  background: var(--slot-hover);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
 
-/* jogador atribuído */
-.player-slot.assigned { background: linear-gradient(180deg,#ffd54f 0%, #ffb300 100%); color: #111; }
+.player-slot:hover::before {
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
 
-/* LISTA DE JOGADORES */
-.players {
-  width: 295px; /* reduzido em 5px conforme solicitado */
+.player-slot.empty {
+  color: transparent;
+}
+
+.player-slot.empty::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  opacity: 0.3;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" xmlns="http://www.w3.org/2000/svg"><path d="M20 21V19C20 16.7909 18.2091 15 16 15H8C5.79086 15 4 16.7909 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"/></svg>') no-repeat center;
+  transition: opacity 0.3s;
+}
+
+.player-slot.empty:hover::after {
+  opacity: 0.8;
+}
+
+/* JOGADOR ATRIBUÍDO */
+.player-slot.assigned {
+  background: var(--slot-assigned);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: #111;
+  box-shadow: var(--shadow-glow);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.4);
+}
+
+.player-slot.assigned:hover {
+  box-shadow: 0 0 30px rgba(255, 216, 0, 0.5);
+}
+
+.player-slot.assigned .add-btn {
+  background: rgba(220, 38, 38, 0.95); /* Vermelho para remover */
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.player-slot.assigned .add-btn:hover {
+  background: rgba(239, 68, 68, 1);
+  transform: translateX(-50%) translateY(-2px) scale(1.1);
+}
+
+/* BOTÃO DE ADICIONAR/REMOVER (+ / x) no slot */
+.add-btn {
+  position: absolute;
+  top: -8px; 
+  right: -8px;
+  /* Reset left/bottom from previous CSS */
+  left: auto;
+  bottom: auto;
+  transform: none; /* remove center sliding */
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 20;
+}
+
+.add-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.15);
+}
+.player-slot.assigned .add-btn {
+  transform: none;
+}
+.player-slot.assigned .add-btn:hover {
+  transform: scale(1.15);
+}
+/* BOTÃO DE COMPARTILHAMENTO */
+.btn-share {
+  background: var(--primary-color);
+  color: #000;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 210, 106, 0.3);
+}
+.btn-share:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 210, 106, 0.5);
+  background: #00e676;
+}
+.btn-share:disabled {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.4);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* FOTOS DOS JOGADORES */
+.slot-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.slot-name-bg {
+  position: absolute;
+  bottom: -22px;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  white-space: nowrap;
+  pointer-events: none;
+  font-family: var(--font-body);
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  z-index: 5;
+}
+.list-player-photo {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--bg-color);
+}
+
+/* ----------- POSIÇÕES TÁTICAS (Transições suaves adicionadas ao .player-slot) ----------- */
+/* Usamos left (eixo X) e bottom (eixo Y) */
+
+/* 4-3-3 (padrão) */
+.field.formation-433 .gk  { bottom: 6%; left: 50%; }
+.field.formation-433 .lb  { bottom: 22%; left: 16%; }
+.field.formation-433 .cb1 { bottom: 20%; left: 36%; }
+.field.formation-433 .cb2 { bottom: 20%; left: 64%; }
+.field.formation-433 .rb  { bottom: 22%; left: 84%; }
+
+.field.formation-433 .cm1 { bottom: 46%; left: 24%; }
+.field.formation-433 .cam { bottom: 44%; left: 50%; }
+.field.formation-433 .cm2 { bottom: 46%; left: 76%; }
+
+.field.formation-433 .lw  { bottom: 76%; left: 20%; }
+.field.formation-433 .st  { bottom: 82%; left: 50%; }
+.field.formation-433 .rw  { bottom: 76%; left: 80%; }
+
+/* 4-2-3-1 */
+.field.formation-4231 .gk  { bottom: 6%; left: 50%; }
+.field.formation-4231 .lb  { bottom: 22%; left: 16%; }
+.field.formation-4231 .cb1 { bottom: 20%; left: 36%; }
+.field.formation-4231 .cb2 { bottom: 20%; left: 64%; }
+.field.formation-4231 .rb  { bottom: 22%; left: 84%; }
+
+.field.formation-4231 .cm1 { bottom: 38%; left: 38%; }
+.field.formation-4231 .cm2 { bottom: 38%; left: 62%; }
+.field.formation-4231 .cam { bottom: 60%; left: 50%; }
+
+.field.formation-4231 .lw  { bottom: 72%; left: 22%; }
+.field.formation-4231 .st  { bottom: 84%; left: 50%; }
+.field.formation-4231 .rw  { bottom: 72%; left: 78%; }
+
+/* 4-4-2 */
+.field.formation-442 .gk  { bottom: 6%; left: 50%; }
+.field.formation-442 .lb  { bottom: 22%; left: 16%; }
+.field.formation-442 .cb1 { bottom: 20%; left: 36%; }
+.field.formation-442 .cb2 { bottom: 20%; left: 64%; }
+.field.formation-442 .rb  { bottom: 22%; left: 84%; }
+
+.field.formation-442 .lw  { bottom: 50%; left: 18%; }
+.field.formation-442 .cm1 { bottom: 48%; left: 38%; }
+.field.formation-442 .cm2 { bottom: 48%; left: 62%; }
+.field.formation-442 .rw  { bottom: 50%; left: 82%; }
+
+.field.formation-442 .st  { bottom: 80%; left: 40%; }
+.field.formation-442 .cam { bottom: 80%; left: 60%; } /* Representa o segundo atacante */
+
+
+/* ----------- PAINEL LATERAL (SIDEBAR) ----------- */
+.sidebar {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 650px;
+  position: relative;
+  overflow: hidden;
+}
+
+.panel h2 {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* LISTA DE POSIÇÕES */
+.positions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding-right: 8px;
+  flex: 1;
+}
+
+.list-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 14px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.list-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.list-item.selected {
+  background: rgba(255, 216, 0, 0.1);
+  border-color: rgba(255, 216, 0, 0.3);
+  color: var(--accent-color);
+  box-shadow: inset 4px 0 0 var(--accent-color);
+}
+
+/* LISTA DE JOGADORES (Painel flutuante interno) */
+.players-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--panel-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100;
+}
+
+.players-panel.open {
+  transform: translateX(0);
+}
+
+.players-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.players-panel-header h2 {
+  margin: 0;
+  color: var(--accent-color);
+  font-size: 22px;
+}
+
+.btn-close {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.btn-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  transform: rotate(90deg);
 }
 
 .player-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  overflow-y: auto;
+  padding-right: 8px;
+  flex: 1;
 }
 
 .player-card {
-  background: linear-gradient(180deg,#0f0f0f 0%, #151515 100%);
-  color: #e6f2e6;
-  padding: 10px 12px;
-  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  border-radius: 12px;
   cursor: pointer;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  border: 1px solid rgba(255,255,255,0.04);
-  transition: 0.2s;
+  gap: 12px;
+  transition: all 0.2s ease;
 }
 
 .player-card:hover {
-  transform: translateX(6px);
-  background: linear-gradient(180deg,#171717 0%, #1b1b1b 100%);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-.player-card.selected {
-  outline: 2px solid #ffd54f;
-  box-shadow: 0 6px 18px rgba(255,181,44,0.08);
-}
-
-.player-card strong { font-size: 14px; }
-.player-card span { font-size: 12px; color: #b9d8b9; }
-
-.player-list { max-height: 420px; overflow: auto; padding-right: 8px; display: flex; flex-direction: column; gap: 8px; }
-
-/* custom scrollbar */
-.player-list::-webkit-scrollbar { width: 8px; }
-.player-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 6px; }
-
-/* painel de jogadores (aberto) */
-.players > div[style] { /* painel absoluto dentro do wrapper .players */
-  background: linear-gradient(180deg, rgba(4,7,4,0.6), rgba(8,12,8,0.4));
-  border: 1px solid rgba(255,255,255,0.04);
-  padding: 12px;
-  border-radius: 8px;
-  width: calc(100% - 5px); /* garante 5px a menos que o container */
-  box-sizing: border-box;
-}
-
-.btn-close {
-  background: rgba(255,255,255,0.03);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.12);
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.15s, transform 0.08s;
-}
-
-.btn-close:hover {
-  background: rgba(255,255,255,0.12);
-  transform: translateY(-1px);
-}
-
-.btn-close:active {
-  transform: translateY(0);
-}
-
-/* indicação visual do slot onde foi colocado */
-.player-slot.highlight {
-  box-shadow: 0 0 0 4px rgba(255,213,79,0.12), 0 8px 24px rgba(0,0,0,0.6);
-}
-
-/* responsividade */
-@media (max-width: 900px) {
-  .container { padding: 12px; }
-  .field { width: 420px; height: 560px; }
-  .players > div[style] { left: 240px; width: 300px; }
-}
-
-.player-slot { padding-bottom: 8px; }
-
-.add-btn {
-  position: absolute;
-  bottom: -12px; /* desloca para baixo para aparecer abaixo do ícone */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(8,8,8,0.8);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.06);
+.player-card-info {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.12s, transform 0.08s, box-shadow 0.12s;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.45);
+  flex-direction: column;
+  gap: 4px;
 }
 
-.add-btn:hover { background: rgba(12,12,12,0.9); transform: translateX(-50%) translateY(-2px); }
-.add-btn:focus { outline: 2px solid rgba(255,213,79,0.16); }
-
-/* quando o slot estiver atribuído, muda levemente o botão para indicar remoção */
-.player-slot.assigned .add-btn {
-  background: rgba(255,80,80,0.95);
+.player-card-info strong {
+  font-family: var(--font-headings);
+  font-size: 16px;
+  font-weight: 600;
   color: #fff;
-  border: 1px solid rgba(255,255,255,0.08);
 }
 
-.player-slot.assigned .add-btn:hover { background: rgba(255,70,70,1); }
+.player-card-info span {
+  font-size: 12px;
+  color: var(--primary-color);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
 
-/* garante que o espaço abaixo do pitch não quebre layout */
-.field .pitch { padding-bottom: 28px; }
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* RESPONSIVO */
+@media (max-width: 980px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+  .sidebar {
+    width: 580px;
+    max-width: 100%;
+  }
+  .panel {
+    height: 400px;
+  }
+  .field {
+    width: 100%;
+    max-width: 580px;
+  }
+}
+
+@media (max-width: 620px) {
+  .field {
+    height: 600px;
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+  .app-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+}
